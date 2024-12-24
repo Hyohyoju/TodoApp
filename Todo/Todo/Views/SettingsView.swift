@@ -10,6 +10,8 @@ import SwiftUI
 struct SettingsView: View {
     // MARK: - PROPERTIES
     
+    @Environment(\.presentationMode) var presentationMode
+    
     // MARK: - BODY
     
     var body: some View {
@@ -18,7 +20,23 @@ struct SettingsView: View {
                 // MARK: - FORM
                 
                 Form {
-                    Text("Hello world!")
+                    // MARK: - SECTION 3
+                    
+                    Section(header: Text("Follow me on social media")) {
+                        FormRowLinkView(icon: "globe", color: .pink, text: "GitHub", link: "https://github.com/Hyohyoju")
+                        FormRowLinkView(icon: "link", color: .blue, text: "velog 개발 블로그", link: "https://velog.io/@julie08051/posts")
+                    }
+                    .padding(.vertical, 1)
+                    
+                    // MARK: SECTION 4
+                    
+                    Section (header: Text("앱 관련 정보")){
+                        FormRowStaticView(icon: "gear", firstText: "어플리케이션", secondText: "Todo")
+                        FormRowStaticView(icon: "checkmark.seal", firstText: "상호성", secondText: "iPhone, iPad")
+                        FormRowStaticView(icon: "keyboard", firstText: "개발자", secondText: "이효주")
+                        FormRowStaticView(icon: "flag", firstText: "버전", secondText: "1.0.0")
+                    } //: SECTION 4
+                    .padding(.vertical, 1)
                 } //: FORM
                 .listStyle(GroupedListStyle())
                 .environment(\.horizontalSizeClass, .regular)
@@ -32,6 +50,11 @@ struct SettingsView: View {
                     .padding(.bottom, 8)
                     .foregroundColor(Color.secondary)
             } //: VSTACK
+            .navigationBarItems(trailing: Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "xmark")
+            })
             .navigationBarTitle("Settings", displayMode: .inline)
             .background(Color("ColorBackground")).edgesIgnoringSafeArea([.leading, .bottom, .trailing])
         }
